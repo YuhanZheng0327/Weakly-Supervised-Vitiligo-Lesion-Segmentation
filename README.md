@@ -1,4 +1,5 @@
-# Weakly-Supervised-Vitiligo-Lesion-Segmentation
+# Code from GloW-VSNet: A Weakly Supervised Deep Learning Framework for Global-View Vitiligo Lesion Segmentation  
+
 environment requirement:  
 python 3.9  
 pytorch 2.3.1  

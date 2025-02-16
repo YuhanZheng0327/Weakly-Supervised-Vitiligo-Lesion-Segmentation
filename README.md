@@ -1,6 +1,6 @@
 # Code from GloW-VSNet: A Weakly Supervised Deep Learning Framework for Global-View Vitiligo Lesion Segmentation  
 The code generates segmentation labels of an input image.
-
+[![](图片地址)](链接网址)
 
 
 # environment requirement:  

@@ -14,7 +14,10 @@ opencv2
 ``` python
 python demo.py
 ```
-# Citations
+
+
+We strongly appreciate these two papers for providing us with inspiration and reference
+
 ```
 @InProceedings{Wang_2019_CVPR,
   author = {Wang, Tianyu and Yang, Xin and Xu, Ke and Chen, Shaozhe and Zhang, Qiang and Lau, Rynson W.H.},

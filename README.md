@@ -21,3 +21,7 @@ We strongly appreciate these two papers for providing us with inspiration and re
 [Unsupervised Learning of Image Segmentation Based on Differentiable Feature Clustering](https://ieeexplore.ieee.org/abstract/document/9151332)
 
 [ScribFormer: Transformer Makes CNN Work Better for Scribble-Based Medical Image Segmentation](https://ieeexplore.ieee.org/abstract/document/10423891)
+
+
+
+Full training and testing code  will be released soon.

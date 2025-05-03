@@ -8,12 +8,11 @@ import numpy as np
 
 
 def heatmap(img):
-    avg_img = np.mean(img, axis=1)  # 对通道维度求平均
-    # 移除批量维度，得到 (768, 1024) 的图像
+    avg_img = np.mean(img, axis=1)
+
     avg_img = avg_img[0]
-    # 归一化到 0-255 之间，并转换为 uint8 类型
+
     avg_img = ((avg_img - avg_img.min()) / (avg_img.max() - avg_img.min()) * 255).astype('uint8')
-    # 使用 applyColorMap 生成热图
     heatmap = cv2.applyColorMap(avg_img, cv2.COLORMAP_JET)
     return heatmap
 
@@ -130,7 +129,7 @@ class SPANet(nn.Module):
         super(SPANet, self).__init__()
 
         self.conv_in = nn.Sequential(
-            conv3x3(3, 50),  # 特征提取后 通过padding 保证shape 不变
+            conv3x3(3, 50),  #
             nn.ReLU(True)
         )
         self.SAM1 = SAM(50, 50, 1)

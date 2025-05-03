@@ -14,24 +14,10 @@ opencv2
 ``` python
 python demo.py
 ```
-
-
 We strongly appreciate these two papers for providing us with inspiration and reference
 
-```
-@InProceedings{Wang_2019_CVPR,
-  author = {Wang, Tianyu and Yang, Xin and Xu, Ke and Chen, Shaozhe and Zhang, Qiang and Lau, Rynson W.H.},
-  title = {Spatial Attentive Single-Image Deraining with a High Quality Real Rain Dataset},
-  booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
-  month = {June},
-  year = {2019}
-}
-```
-```
-@InProceedings{IEEE Transactions on Image Processing,
-  author = {Wonjik Kim*, Asako Kanezaki*, and Masayuki Tanaka},
-  title = {Unsupervised Learning of Image Segmentation Based on Differentiable Feature Clustering},
-  booktitle = {IEEE Transactions on Image Processing}, 
-  year = {2020}
-  }
-```
+[Spatial Attentive Single-Image Deraining with a High Quality Real Rain Dataset](https://openaccess.thecvf.com/content_CVPR_2019/html/Wang_Spatial_Attentive_Single-Image_Deraining_With_a_High_Quality_Real_Rain_CVPR_2019_paper.html)
+
+[Unsupervised Learning of Image Segmentation Based on Differentiable Feature Clustering](https://ieeexplore.ieee.org/abstract/document/9151332)
+
+[ScribFormer: Transformer Makes CNN Work Better for Scribble-Based Medical Image Segmentation](https://ieeexplore.ieee.org/abstract/document/10423891)

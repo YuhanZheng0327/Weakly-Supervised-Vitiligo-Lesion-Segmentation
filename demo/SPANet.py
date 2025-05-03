@@ -74,7 +74,6 @@ class Attention(nn.Module):
         self.relu1 = nn.ReLU()
         self.conv2 = nn.Conv2d(self.out_channels,self.out_channels,kernel_size=3,padding=2, stride=1, dilation=2)
         self.relu2 = nn.ReLU()
-
         self.conv3 = nn.Conv2d(self.out_channels,4,kernel_size=1,padding=0,stride=1)
         self.sigmod = nn.Sigmoid()
     
@@ -120,43 +119,15 @@ class SAM(nn.Module):
             top_down.mul(weight[:,2:3,:,:])
             top_left.mul(weight[:,3:4,:,:])
         out = torch.cat([top_up,top_right,top_down,top_left],dim=1)
-        #
-        # out = self.conv2(out)
-        # top_up,top_right,top_down,top_left = self.irnn2(out)
-        #
-        # # direction attention
-        # if self.attention:
-        #     top_up.mul(weight[:,0:1,:,:])
-        #     top_right.mul(weight[:,1:2,:,:])
-        #     top_down.mul(weight[:,2:3,:,:])
-        #     top_left.mul(weight[:,3:4,:,:])
-        #
-        # out = torch.cat([top_up,top_right,top_down,top_left],dim=1)
-
-        up = top_up.detach().cpu().numpy() * 255
-        up_heatmap = heatmap(up.astype('uint8'))
-
-        right = top_right.detach().cpu().numpy() * 255
-        right_heatmap = heatmap(right.astype('uint8'))
-        # cv2.imwrite('./Output_withoutKmeans3/direction_heatmap/right2.jpg', right_heatmap)
-        down = top_down.detach().cpu().numpy() * 255
-        down_heatmap = heatmap(down.astype('uint8'))
-        # cv2.imwrite('./Output_withoutKmeans3/direction_heatmap/down2.jpg', down_heatmap)
-        left = top_left.detach().cpu().numpy() * 255
-        left_heatmap = heatmap(left.astype('uint8'))
-        # cv2.imwrite('./Output_withoutKmeans3/direction_heatmap/left2.jpg', left_heatmap)
 
         out = self.conv3(out)
         out = self.relu2(out)
         mask = self.sigmod(self.conv_out(out))
-        return mask, up_heatmap, right_heatmap,down_heatmap,left_heatmap
-
+        return mask
 ###### Network
 class SPANet(nn.Module):
     def __init__(self):
         super(SPANet, self).__init__()
-
-
 
         self.conv_in = nn.Sequential(
             conv3x3(3, 50),  # 特征提取后 通过padding 保证shape 不变
@@ -177,14 +148,7 @@ class SPANet(nn.Module):
         self.res_block7 = Bottleneck(50, 50)
         self.res_block8 = Bottleneck(50, 50)
         self.res_block9 = Bottleneck(50, 50)
-        # self.res_block10 = Bottleneck(70, 70)
-        # self.res_block11 = Bottleneck(70, 70)
-        # self.res_block12 = Bottleneck(70, 70)
-        # self.res_block13 = Bottleneck(50, 50)
-        # self.res_block14 = Bottleneck(50, 50)
-        # self.res_block15 = Bottleneck(50, 50)
-        # self.res_block16 = Bottleneck(50, 50)
-        # self.res_block17 = Bottleneck(50, 50)
+
         self.conv_out = nn.Sequential(
             conv1x1(50, 50)
         )
@@ -195,42 +159,21 @@ class SPANet(nn.Module):
 
         out = self.conv_in(x)  # CONV +RELU
         out = F.relu(self.res_block1(out) + out)  # RB
-        # out = F.relu(self.res_block2(out) + out)  # RB
-        # out = F.relu(self.res_block3(out) + out)  # RB
 
         Attention1, up_heatmap, right_heatmap,down_heatmap,left_heatmap = self.SAM1(out)  # SAB
         out = F.relu(self.res_block4(out) * Attention1 + out)
         out = F.relu(self.res_block5(out) * Attention1 + out)
         out = F.relu(self.res_block6(out) * Attention1 + out)
 
-        # out = F.relu(self.res_block4(out) + out)
-        # out = F.relu(self.res_block5(out) + out)
-        # out = F.relu(self.res_block6(out) + out)
         out = self.bn1(out)
         Attention2,_,_,_,_  = self.SAM1(out)
         out = F.relu(self.res_block7(out) * Attention2 + out)
         out = F.relu(self.res_block8(out) * Attention2 + out)
         out = F.relu(self.res_block9(out) * Attention2 + out)
 
-        # out = F.relu(self.res_block7(out) + out)
-        # out = F.relu(self.res_block8(out) + out)
-        # out = F.relu(self.res_block9(out) + out)
         out = self.bn2(out)
-        # Attention3 = self.SAM1(out)
-        # out = F.relu(self.res_block10(out) * Attention3 + out)
-        # out = F.relu(self.res_block11(out) * Attention3 + out)
-        # out = F.relu(self.res_block12(out) * Attention3 + out)
-        # out = self.bn3(out)
-        # Attention4 = self.SAM1(out)
-        # out = F.relu(self.res_block13(out) * Attention4 + out)
-        # out = F.relu(self.res_block14(out) * Attention4 + out)
-        # out = F.relu(self.res_block15(out) * Attention4 + out)
-        # out = self.bn4(out)
-        # out = F.relu(self.res_block16(out) + out)
-        # out = F.relu(self.res_block17(out) + out)
 
         out = self.conv_out(out)
         out = self.bn5(out)
-        return Attention1, out, up_heatmap, right_heatmap,down_heatmap,left_heatmap
-        # return out
+        return Attention1, out
 

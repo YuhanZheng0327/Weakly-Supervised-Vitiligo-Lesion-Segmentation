@@ -2,7 +2,6 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 from collections import OrderedDict
-from models_utils import weights_init, print_network
 import cv2
 import numpy as np
 
@@ -159,13 +158,13 @@ class SPANet(nn.Module):
         out = self.conv_in(x)  # CONV +RELU
         out = F.relu(self.res_block1(out) + out)  # RB
 
-        Attention1, up_heatmap, right_heatmap,down_heatmap,left_heatmap = self.SAM1(out)  # SAB
+        Attention1 = self.SAM1(out)  # SAB
         out = F.relu(self.res_block4(out) * Attention1 + out)
         out = F.relu(self.res_block5(out) * Attention1 + out)
         out = F.relu(self.res_block6(out) * Attention1 + out)
 
         out = self.bn1(out)
-        Attention2,_,_,_,_  = self.SAM1(out)
+        Attention2 = self.SAM1(out)
         out = F.relu(self.res_block7(out) * Attention2 + out)
         out = F.relu(self.res_block8(out) * Attention2 + out)
         out = F.relu(self.res_block9(out) * Attention2 + out)

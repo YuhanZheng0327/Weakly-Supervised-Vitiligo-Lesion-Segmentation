@@ -14,7 +14,7 @@ opencv2
 ``` python
 python demo.py
 ```
-We strongly appreciate these two papers for providing us with inspiration and reference
+We strongly appreciate these following papers for providing us with inspiration and reference
 
 [Spatial Attentive Single-Image Deraining with a High Quality Real Rain Dataset](https://openaccess.thecvf.com/content_CVPR_2019/html/Wang_Spatial_Attentive_Single-Image_Deraining_With_a_High_Quality_Real_Rain_CVPR_2019_paper.html)
 
@@ -24,4 +24,4 @@ We strongly appreciate these two papers for providing us with inspiration and re
 
 
 
-Full training and testing code  will be released soon.
+More details  will be released soon.

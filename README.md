@@ -12,6 +12,7 @@ opencv2
 
 # test
 ``` python
+cd demo
 python demo.py
 ```
 We strongly appreciate these following papers for providing us with inspiration and reference

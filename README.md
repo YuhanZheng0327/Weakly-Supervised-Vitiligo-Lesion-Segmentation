@@ -1,3 +1,8 @@
+# 📚 Our Paper
+
+- **[GloW-VSNet: A scribble-based weakly supervised framework for global-view vitiligo lesion segmentation](https://doi.org/10.1016/j.media.2025.103920)**  
+  *Medical Image Analysis*, 2025. DOI: [10.1016/j.media.2025.103920](https://doi.org/10.1016/j.media.2025.103920)
+
 # Code of Vitiligo Lesion Segmentation  
 The code generates segmentation labels of an input image.
 ![DEMO](https://github.com/YuhanZheng0327/Weakly-Supervised-Vitiligo-Lesion-Segmentation/blob/master/GITHUB.jpg)  
